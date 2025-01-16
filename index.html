@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" type="image/x-icon" href="Cric stream Favicon.jpg">
+    <link rel="shortcut icon" type="image/x-icon" href="Cric_stream_Favicon.jpg">
     <title>TG- @cric_stream</title>
     <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
     <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
@@ -14,30 +14,25 @@
             padding: 5px;
             font-family: Arial, sans-serif;
         }
-
         .video-container {
             width: 100%;
             background-color: white;
         }
-
         video {
             width: 100%;
             height: auto;
         }
-
         .content {
             padding: 0;
             background-color: white;
         }
-
         #joinTelegramButton {
             background-color: #fff;
             color: #0074d9;
             border: 2px solid #0074d9;
-            padding: 0;
+            padding: 10px 20px;
             cursor: pointer;
         }
-
         #joinTelegramButton:hover {
             background-color: #0074d9;
             color: #fff;
@@ -46,19 +41,23 @@
 </head>
 <body>
     <div class="video-container">
-        <video preload="none" id="video" autoplay controls crossorigin="anonymous" poster="CRIC stream Thumbnail .jpg"></video>
+        <video preload="none" id="video" autoplay controls crossorigin poster="CRIC_stream_Thumbnail.jpg"></video>
     </div>
 
     <div class="content">
         <script>
             document.addEventListener("DOMContentLoaded", () => {
                 const urlParams = new URLSearchParams(window.location.search);
-                const videoUrl = urlParams.get('video');
+                let videoUrl = urlParams.get('video');
 
                 if (!videoUrl) {
                     document.body.innerHTML = "<h2>Video URL missing in query parameter</h2>";
                     return;
                 }
+
+                // Proxy the URL to bypass CORS restrictions
+                const proxyUrl = "https://corsproxy.io/?";
+                videoUrl = proxyUrl + encodeURIComponent(videoUrl);
 
                 const video = document.getElementById('video');
                 const defaultOptions = {
@@ -67,8 +66,11 @@
                         'play',
                         'progress',
                         'duration',
+                        'live',
                         'mute',
                         'settings',
+                        'pip',
+                        'airplay',
                         'fullscreen',
                     ],
                     settings: ['quality'],
@@ -76,51 +78,56 @@
 
                 const errorMessageTimeout = setTimeout(() => {
                     document.body.innerHTML = "<h2>There was an issue loading the stream. Please try again later.</h2>";
-                }, 60000);
+                }, 120000);
 
-                if (Hls.isSupported()) {
-                    const hls = new Hls({
-                        enableWorker: true, // Optimize performance
-                        xhrSetup: function (xhr) {
-                            xhr.withCredentials = false; // Ensure credentials are not included
-                        },
-                    });
+                if (videoUrl.endsWith('.m3u8')) {
+                    if (Hls.isSupported()) {
+                        const hls = new Hls({
+                            debug: true,
+                            xhrSetup: function (xhr) {
+                                xhr.withCredentials = false; // Ensure credentials are not sent
+                                xhr.setRequestHeader('Origin', window.location.origin); // Add Origin header
+                            },
+                        });
 
-                    hls.loadSource(videoUrl);
-                    hls.attachMedia(video);
+                        hls.loadSource(videoUrl);
+                        hls.attachMedia(video);
 
-                    hls.on(Hls.Events.MANIFEST_PARSED, () => {
-                        const availableQualities = hls.levels.map(level => level.height);
+                        hls.on(Hls.Events.MANIFEST_PARSED, () => {
+                            const availableQualities = hls.levels.map(level => level.height);
 
-                        defaultOptions.quality = {
-                            default: 0,
-                            options: availableQualities,
-                            forced: true,
-                            onChange: (newQuality) => updateQuality(hls, newQuality),
-                        };
+                            defaultOptions.quality = {
+                                default: 0,
+                                options: availableQualities,
+                                forced: true,
+                                onChange: (newQuality) => updateQuality(hls, newQuality),
+                            };
 
-                        new Plyr(video, defaultOptions);
-                        clearTimeout(errorMessageTimeout);
-                    });
+                            new Plyr(video, defaultOptions);
+                            clearTimeout(errorMessageTimeout);
+                        });
 
-                    hls.on(Hls.Events.ERROR, (event, data) => {
-                        console.error('HLS.js Error:', data);
-                        if (data.fatal) {
-                            document.body.innerHTML = `<h2>Stream loading error: ${data.details}</h2>`;
-                        }
-                    });
-                } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-                    video.src = videoUrl;
-                    new Plyr(video, defaultOptions);
-                    video.onplaying = () => clearTimeout(errorMessageTimeout);
+                        hls.on(Hls.Events.ERROR, (event, data) => {
+                            console.error('HLS.js Error:', data);
+                            if (data.fatal) {
+                                document.body.innerHTML = `<h2>Error loading stream: ${data.details}</h2>`;
+                            }
+                        });
+                    } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+                        video.src = videoUrl;
+                        const player = new Plyr(video, defaultOptions);
+                        video.onplaying = () => clearTimeout(errorMessageTimeout);
+                    } else {
+                        document.body.innerHTML = "<h2>HLS not supported on your browser</h2>";
+                    }
                 } else {
-                    document.body.innerHTML = "<h2>HLS not supported on your browser</h2>";
+                    document.body.innerHTML = "<h2>Unsupported video format</h2>";
                 }
             });
 
             function updateQuality(hls, newQuality) {
                 if (newQuality === 0) {
-                    hls.currentLevel = -1; // Auto
+                    hls.currentLevel = -1;
                 } else {
                     hls.levels.forEach((level, index) => {
                         if (level.height === newQuality) {
