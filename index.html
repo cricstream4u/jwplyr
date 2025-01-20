@@ -3,270 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Watch Match - Desert Vipers vs Dubai Capitals</title>
-    <script disable-devtool-auto src='https://cdn.jsdelivr.net/npm/disable-devtool'></script>
+    <title>Watch Live Match</title>
     <style>
         body {
             margin: 0;
-            font-family: 'Arial', sans-serif;
-            background-color: #333;
-            color: #fff;
+            font-family: Arial, sans-serif;
+            background-color: #000;
             display: flex;
             align-items: center;
             justify-content: center;
             height: 100vh;
-            overflow: hidden;
-            text-align: center;
+            color: #fff;
         }
         #jwplayerDiv {
+            width: 100%;
+            height: 100%;
             position: absolute;
-            width: 100% !important;
-            height: 100% !important;
         }
-        .message-container {
-            max-width: 600px;
-            padding: 20px;
-            background-color: #444;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-        }
-        .message-container p {
-            margin: 10px 0;
-        }
-        .join-button {
-            display: inline-block;
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: #fff;
-            text-decoration: none;
-            border-radius: 5px;
-            margin-top: 20px;
-            transition: background-color 0.3s ease;
-        }
-        .join-button:hover {
-            background-color: #0056b3;
-        }
-        .telegram-toggle {
-        position: fixed;
-        top: 10px;
-        right: 10px;
-        background-color: #0088cc;
-        color: #fff;
-        padding: 10px 15px;
-        border-radius: 50px;
-        text-decoration: none;
-        font-weight: bold;
-        display: flex;
-        align-items: center;
-        z-index: 1001;
-      }
-
-      .telegram-toggle img {
-        width: 20px;
-        height: 20px;
-        margin-right: 5px;
-      }
-
-      #message {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.8);
-        color: #fff;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 24px;
-        z-index: 1001;
-      }
-
-      /* Modal popup styling */
-      .popup {
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        background-color: #1c1c1c;
-        border-radius: 10px;
-        padding: 20px;
-        text-align: center;
-        box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.2);
-        z-index: 1002;
-        width: 90%;
-        max-width: 400px;
-        animation: fadeIn 0.5s;
-      }
-
-      .popup h2 {
-        color: #ffcc00;
-        margin-bottom: 10px;
-        font-size: 20px;
-      }
-
-      .popup p {
-        margin-bottom: 20px;
-        color: #ccc;
-        font-size: 16px;
-      }
-
-      .popup button {
-        background-color: #0088cc;
-        color: #fff;
-        border: none;
-        padding: 10px;
-        border-radius: 5px;
-        cursor: pointer;
-        transition: background-color 0.3s;
-        margin-bottom: 10px;
-        width: 100%;
-      }
-
-      .popup button:hover {
-        background-color: #006699;
-      }
-
-      .popup .close-btn {
-        background-color: #555;
-      }
-
-      .popup .close-btn:hover {
-        background-color: #333;
-      }
-
-      .popup a {
-        color: #ffcc00;
-        text-decoration: none;
-      }
-
-      @keyframes fadeIn {
-        from {
-          opacity: 0;
-        }
-        to {
-          opacity: 1;
-        }
-      }
-
-      /* Small screen adjustments */
-      @media (max-width: 600px) {
-        .popup {
-          width: 90%;
-        }
-
-        .popup h2 {
-          font-size: 18px;
-        }
-
-        .popup p {
-          font-size: 14px;
-        }
-
-        .popup button {
-          padding: 10px;
-        }
-      }
-  .tg-banner {
-  position: absolute;
-  top: 10px; /* Adjusted from 20px */
-  left: 10px; /* Adjusted from 20px */
-  background: linear-gradient(135deg, #1da1f2, #0077b5);
-  border-radius: 8px; /* Adjusted from 12px */
-  padding: 8px 12px; /* Adjusted from 12px 18px */
-  display: flex;
-  align-items: center;
-  color: white;
-  text-decoration: none;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Adjusted shadow */
-  z-index: 1000;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.tg-banner:hover {
-  transform: translateY(-3px); /* Adjusted from -5px */
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4); /* Adjusted shadow */
-}
-
-.tg-banner img {
-  width: 24px; /* Adjusted from 36px */
-  height: 24px; /* Adjusted from 36px */
-  margin-right: 8px; /* Adjusted from 12px */
-  border-radius: 50%;
-  border: 1px solid white; /* Adjusted from 2px */
-}
-
-.tg-banner span {
-  font-size: 14px; /* Adjusted from 18px */
-  font-weight: 600;
-  letter-spacing: 0.3px; /* Adjusted from 0.5px */
-}
     </style>
-    <script src="https://content.jwplatform.com/libraries/SAHhwvZq.js"></script>
+    <script src="https://cdn.jwplayer.com/libraries/SAHhwvZq.js"></script>
 </head>
 <body>
-            <div id="jwplayerDiv"></div>
-        
-        <script type="text/javascript">
-            var playerInstance = jwplayer("jwplayerDiv");
-            var source = {
-                "file": "https://ww.cricsterspkl.io/fc/copy-karne-vala-2-baap-ka-and-gay.php/https://dai.fancode.com/primary/115964_english_hls4518ta-no/index.m3u8",
-                "default": true,
-                onXhrOpen: function(xhr, url) {
-                                            xhr.setRequestHeader('Authorization', 'Bearer C8l4gWXxqG8wx7ugPkOgjq72FtGiw9GZm4gXPw4vAI3WWbvhpPZp8Q0bhUbMUsOl');
-                                    }
-            };
-            source.type = "hls"; // Set the type to "hls" for .m3u8 streams
-            playerInstance.setup({
-                playlist: [{
-                    "sources": [source]
-                }],
-                width: "100%",
-                height: "100%",
-                aspectratio: "16:9",
-                autostart: true,
-                cast: {
-                    appid: 'CC1AD845'
-                }
-            });
-            
-            // Display a pop-up message when the page starts
-            window.addEventListener("load", function() {
-                var result = window.confirm("Join @cric_stream for more updates?");
-                if (result) {
-                    window.location.href = "https://t.me/+ESR7kTRkAHI1NTI1";
-                }
-            });
-        </script>
-        <script>
-     
-      // Display a modern pop-up message when the page starts
-      window.addEventListener("load", function() {
-        // Create the popup element
-        var popup = document.createElement("div");
-        popup.className = "popup";
+    <div id="jwplayerDiv"></div>
+    <script>
+        // Initialize JW Player
+        const playerInstance = jwplayer("jwplayerDiv");
 
-        // Set the popup content
-        popup.innerHTML = `
-          <h2>Support Us!</h2>
-          <p>Join our Telegram channel <br>@cric_stream for more updates.</p>
-          <button id="joinButton">Join Now and support us</button>
-          <button id="closeButton" class="close-btn">Already Joined</button>
-        `;
-
-        // Append the popup to the body
-        document.body.appendChild(popup);
-
-        // Add click event to the Join Now button
-        document.getElementById("joinButton").addEventListener("click", function() {
-          window.location.href = "https://t.me/+ESR7kTRkAHI1NTI1";
+        // Configure the player with the HLS stream
+        playerInstance.setup({
+            file: "https://rriptv.top/watch.php?id=e11f5fd4a4f8d93211d512209b24111c15593bd2484daf7fd8c890afebdddea4b981bda5f68b096e47ce5213b3e3bf4434b8b35b69ef91249b32132036c47cf8&e=.m3u8",
+            width: "100%",
+            height: "100%",
+            aspectratio: "16:9",
+            autostart: true,
+            type: "hls", // Ensures HLS compatibility
+            preload: "auto", // Preload stream for faster playback
+            cast: {
+                appid: "CC1AD845" // Chromecast App ID (optional)
+            }
         });
 
-        // Add click event to the Already Joined button to close the popup
-        document.getElementById("closeButton").addEventListener("click", function() {
-          document.body.removeChild(popup);
+        // Optional: Handle player errors gracefully
+        playerInstance.on('error', function(error) {
+            console.error("Error loading stream:", error.message);
+            alert("Failed to load the stream. Please try again later.");
         });
-      });
-</script>
-    </body>
+    </script>
+</body>
 </html>
