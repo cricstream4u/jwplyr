@@ -91,42 +91,29 @@
 <body>
     <div id="jwplayerDiv"></div>
     <script>
-        // Function to get URL query parameters
-        function getQueryParam(param) {
-            const urlParams = new URLSearchParams(window.location.search);
-            return urlParams.get(param);
-        }
+        const hlsStreamUrl = "https://cors-bypass.yourdomain.workers.dev/primary/115981_english_hls_6221ta-no/index.m3u8";
 
-        // Retrieve the 'file' parameter from the URL
-        const hlsStreamUrl = getQueryParam("file");
+        const playerInstance = jwplayer("jwplayerDiv");
+        
+        playerInstance.setup({
+            file: hlsStreamUrl,
+            width: "100%",
+            height: "100%",
+            aspectratio: "16:9",
+            autostart: true,
+            mute: false,
+            type: "hls",
+            preload: "auto",
+            cast: {
+                appid: "CC1AD845"
+            }
+        });
+        
+        playerInstance.on('error', function(error) {
+            console.error("Error loading stream:", error.message);
+            alert("Failed to load the stream. Please check the URL and try again.");
+        });
 
-        if (!hlsStreamUrl) {
-            alert("No HLS stream URL provided. Please add a 'file' parameter to the URL.");
-        } else {
-            // Initialize JW Player
-            const playerInstance = jwplayer("jwplayerDiv");
-
-            // Configure the player with the HLS stream from URL parameter
-            playerInstance.setup({
-                file: hlsStreamUrl,
-                width: "100%",
-                height: "100%",
-                aspectratio: "16:9",
-                autostart: true,
-                mute: false, 
-                type: "hls", // Ensures HLS compatibility
-                preload: "auto", // Preload stream for faster playback
-                cast: {
-                    appid: "CC1AD845" // Chromecast App ID (optional)
-                }
-            });
-
-            // Optional: Handle player errors gracefully
-            playerInstance.on('error', function(error) {
-                console.error("Error loading stream:", error.message);
-                alert("Failed to load the stream. Please check the URL and try again.");
-            });
-        }
     </script>
 
       <script>
