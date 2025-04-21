@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>TG-@cric_stream</title>
   <link rel="shortcut icon" type="image/x-icon" href="Cric stream Favicon.jpg">
-    
+   <script src="https://cdn.tailwindcss.com"></script> 
   <style>
     body {
       
@@ -14,31 +14,8 @@
       height: 100vh;
     }
 
-    header {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 100%;
-      height:4rem;
-      margin-bottom:5px;
-     background-color: #1e3a8a;
-    }
-
-   a {
-      display: block;
-    margin:0px;
-    padding:0px;
-    justify-content: center;
-    align-items: center;
-    
-   }
-
-    header img {
-     max-width: 200px;
-      width: 40%;
-      height: auto;
-      display: block;
-    
+    .no-tailwind {
+    all: unset;
     }
 
    #jwplayerDiv{
@@ -54,10 +31,8 @@
 </head>
 <body oncontextmenu="return false">
   <!-- Header -->
-    <header>
-     <a href="https://cinearena.live" target="_blank" rel="noopener noreferrer">
-     <img src="cineheader.png" alt="Sample Image">
-     </a>
+    <header class="p-4 bg-blue-900 text-white text-center text-2xl font-bold">
+       <a href="https://cinearena.live/"> <img src="cineheader.png" class="h-10 md:h-10 lg:h-10 mx-auto"></a>
     </header>
   <!--Player-->
   <div id="jwplayerDiv"></div>
@@ -68,7 +43,7 @@
     <noscript><a href="https://www.supercounters.com/">supercounters.com</a></noscript>
   </center>
 
-  <div style="background-color: #0074d9; text-align: center; padding: 10px;">
+  <div class="no-tailwind" style="background-color: #0074d9; text-align: center; padding: 10px;">
     <a href="https://t.me/cric_stream" target="_blank">
       <button id="joinTelegramButton">Join Telegram</button>
     </a>
