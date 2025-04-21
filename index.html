@@ -13,6 +13,28 @@
       width: 100wh;
       height: 100vh;
     }
+
+    .image-container {
+      position: relative;
+      width: 100%;
+      max-width: 600px;
+    }
+
+    .image-container img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .centered-header {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+      font-size: 2em;
+      text-shadow: 2px 2px 4px #000;
+    }
     
     .jwplayerDiv {
       margin-top:5px;
@@ -29,10 +51,10 @@
 </head>
 <body oncontextmenu="return false">
   <!-- Header -->
-    <header class="p-4 bg-blue-900 text-white text-center text-2xl font-bold">
-       <a href="https://cinearena.live/"> <img src="cineheader.png" class="h-10 md:h-10 lg:h-10 mx-auto"></a>
-    </header>
-
+    <div class="image-container">
+  <img src="cineheader.png" alt="Sample Image">
+  <div class="centered-header"></div>
+    </div>
   <!--Player-->
   <div id="jwplayerDiv"></div>
 
