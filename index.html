@@ -31,7 +31,14 @@
        padding-left: 10px;
        padding-right: 10px;
    }
-    
+    @keyframes marquee{ 
+
+        from { transform: translateX(0%); }
+
+        to { transform: translateX(-100%); }
+
+    }
+
   </style>
   <script src="https://cdn.jwplayer.com/libraries/IDzF9Zmk.js"></script>
   <script src="script.js" defer></script>
@@ -41,6 +48,24 @@
     <header class="p-4 bg-blue-900 text-white text-center text-2xl font-bold">
        <a href="https://cinearena.live/"> <img src="cineheader.png" class="h-10 md:h-10 lg:h-10 mx-auto"></a>
     </header>
+
+ <div style="display: flex; align-items: center; gap: 0px; width: 100%; background-color: #006400;">
+
+<!-- Fixed H4 -->
+
+<h4 style="flex-shrink: 0; margin: 0; font-size: 20px; color: #fff; background-color: #006400;">UPDATES:</h4>
+
+<!-- Scrolling P (Marquee) -->
+
+<div style="overflow: hidden; white-space: nowrap; flex-grow: 1; box-sizing: border-box;">
+
+<p style="display: inline-block; margin: 0; font-size: 18px; color: white; background-color: #dc143c; animation: marquee 50s linear infinite;">The Video May Take 30 Seconds To Play. After That, There Will Be No Buffering. If Any Issue, Inform us on Telegeram. वीडियो को चलने में 30 सेकंड का समय लग सकता है, उसके बाद कोई बफ़रिंग नहीं होगी अधिक जानने के लिए टेलीग्राम पर हमसे जुड़ें।</p>
+
+
+
+</div>
+
+</div>
   <!--Player-->
   <div id="jwplayerDiv"></div>
 
