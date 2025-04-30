@@ -27,7 +27,7 @@ function getQueryParam(param) {
 }
 
 // Base64 Encoded Default Stream URL
-const encodedUrl = "";
+const encodedUrl = "https%3A%2F%2Fdai.fancode.com%2Fprimary%2F123522_english_hls_60901ta-di_h264%2Findex.m3u8";
 
 // Decode the Base64-encoded URL, or use the `file` query parameter if available
 const streamUrl = getQueryParam("file") || atob(encodedUrl);
